@@ -10,6 +10,10 @@ const userSchema = mongoose.Schema({
         trim: true, //스페이스 없애주는 역할
         unique: 1
     },
+    password: {
+        type: String,
+        maxlength: 15
+    },
     lastname: {
         type: String,
         maxlength: 50
