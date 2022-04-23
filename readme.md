@@ -47,3 +47,4 @@
 # k2: Secret Information => for preventing secret info from being commited to github
 # # 2022_practice
 # ..
+# 2022_practice
