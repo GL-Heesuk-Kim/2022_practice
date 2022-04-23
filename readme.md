@@ -2,7 +2,7 @@
 
 
 ```bash
-
+# #5git
 #git add .
 #git rm --cached node_modules
 #git status
@@ -17,6 +17,11 @@
 
 #my local repository ------------(Secure SHell aka.ssh)---------  git hub repository
 #ls -a ~/.ssh #exisitence checking
+
+# 깃허브 올리기 최종 순서***
+# git add . => staging area
+# git commit -m "messages I want to say"
+
 
 
 #7
@@ -37,3 +42,8 @@
     "start": "node index.js", "_이건 star를 입력하면 node로 실행할게"
     "backend": "nodemon index.js", "_이건 backend를 입력하면 nodemon로 실행할게"
 
+# #9
+# k1: DEVELOPMENT OR PRODUCTION => local development mode OR cloud (after deploy) ex.herokus mode
+# k2: Secret Information => for preventing secret info from being commited to github
+# # 2022_practice
+# ..
