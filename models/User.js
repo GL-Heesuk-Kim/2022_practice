@@ -1,5 +1,9 @@
 const mongoose = require('mongoose')
 
+//비밀번호 암호화 작업: salt활용 ; saltround 10이면 10자리를 ...
+const bcrypt = require('bcrypt');
+const saltRounds = 10
+
 const userSchema = mongoose.Schema({
     name: {
         type:String,
@@ -30,6 +34,21 @@ const userSchema = mongoose.Schema({
         type: Number
     }
 })
+
+userSchema.pre('save', function( next ){
+
+    //비밀번호를 암호화 시키기
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(myPlaintextPassword, salt, function(err, hash) {
+            // Store hash in your password DB.
+        });
+    });
+
+
+    next()
+
+})  //이건 몽구스에서 가져온 메소드
+
 
 const User = mongoose.model('User', userSchema)
 
