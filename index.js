@@ -22,7 +22,7 @@ app.use(cookieParser());
 const mongoose = require('mongoose')
 mongoose.connect(
     config.mongoURI
-    ).then(() => console.log('MongoDB Is Connected GL^.^'))
+    ).then(() => console.log('연결됐습니다. (여기 연결됐을때 메시지가 나오는거)'))
      .catch(err => console.log('Hey GL, We Got Problem With Connecting MongoDB...\n', err))
 
 
@@ -30,7 +30,7 @@ mongoose.connect(
 app.get('/', (req, res) => {
   res.send(`Hello World! 안녕하세요. 
   단순히 비쥬얼만 보여지는 것이 아니라
-  기능이 구현된 페이지를 만들고 싶습니다. 감사합니다.`)
+  기능이 구현된 페이지를 만들고 싶습니다. 감사합니당.`)
 })
 
 
