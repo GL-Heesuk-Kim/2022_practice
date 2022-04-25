@@ -11,17 +11,20 @@
 
 #git remote add origin git@github.com:GL-Heesuk-Kim/inflearn.git
 #git branch -M main
-#git push -u origin main
+
 
 #git@github.com:GL-Heesuk-Kim/inflearn.git
 
 #my local repository ------------(Secure SHell aka.ssh)---------  git hub repository
+
+
 #ls -a ~/.ssh #exisitence checking
 
-# 깃허브 올리기 최종 순서***
+
+# 깃허브 올리기 최종 순서*** 현재 이 환경에서
 # git add . => staging area
 # git commit -m "messages I want to say"
-
+# git push -u origin
 
 
 #7
@@ -47,4 +50,3 @@
 # k2: Secret Information => for preventing secret info from being commited to github
 # # 2022_practice
 # ..
-# 2022_practice
