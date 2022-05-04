@@ -41,9 +41,7 @@
 #=> 서버를 껐다 키지 않아도!
 
 # package.json에서
-  "scripts": {
-    "start": "node index.js", "_이건 star를 입력하면 node로 실행할게"
-    "backend": "nodemon index.js", "_이건 backend를 입력하면 nodemon로 실행할게"
+ 
 
 # #9
 # k1: DEVELOPMENT OR PRODUCTION => local development mode OR cloud (after deploy) ex.herokus mode
