@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        maxlength: 15
+        maxlength: 100
     },
     lastname: {
         type: String,
@@ -58,6 +58,38 @@ userSchema.pre('save', function( next ){
          next()
      }
 })
+
+// #11 login part
+userSchema.methods.comparePassword = function(plainPassword, cb) {
+
+    //plainPassword 1234  & 암호화된 비밀번호 2d$sd2#^d$36
+    //암호화가 된 비밀번호를 복화할 수는 없다. 그렇다면 플레인패스워드를 똑같이 암호화해서 그 둘이 같은지를 확인해야한다.
+    bcrypt.compare(plainPassword, this.password, function(err, isMatch){
+        if(err) return cb(err);
+        cb(null, isMatch);
+    })
+    
+
+}
+
+
+userSchema.methods.generateToken = function(cb) {
+    var user = this;
+    // jsonwebtoken을 이용해서 token을 생성하기 
+    var token = jwt.sign(user._id.toHexString(),  'secretToken')
+
+    // user._id + 'secretToken' = token
+
+    // ->
+
+    // 'secretToken' -> user._id
+    user.token = token
+    user.save(function(err, user) {
+        if(err) return cb(err)
+        cb(null, user)
+    })
+}
+
 
 
 const User = mongoose.model('User', userSchema)

@@ -22,7 +22,7 @@ app.use(cookieParser());
 const mongoose = require('mongoose')
 mongoose.connect(
     config.mongoURI
-    ).then(() => console.log('연결됐습니다. (여기 연결됐을때 메시지가 나오는거)'))
+    ).then(() => console.log('연결됐습니다. 100% 연결되었어요.'))
      .catch(err => console.log('Hey GL, We Got Problem With Connecting MongoDB...\n', err))
 
 
@@ -42,13 +42,52 @@ app.post('/register', (req, res) => {
   const user = new User(req.body)
   //req.body안에 아이디와 패스워드 정보가 담겨서 들어오게 되는게 이게 가능한 이유는 bodyparser가 있기 때문
 
-  user.save((err, userInfo) => {
+  user.save((err, UserInfo) => {
     if(err) return res.json({success: false, err})
     return res.status(200).json({
       success: true
     })
   })
   //.save는 몽고디비에서 오는 메소드 => req.body에 담겨있는 정보들이 user 모델에 저장(save)가 됨
+})
+
+
+//#11-login route
+app.post('/login', (req,res) => {
+  
+  // 요청된 이일ㅡㄹ 데터이스에서 있는지 찾ㅡ다
+  User.findOne({ email: req.body.email  }, (err, user) => {
+    if(!user) {
+      return res.json({
+        loginSuccess: false,
+        message: "해당 이메일로 가입된 유저가 없습니다."
+      })
+    }
+
+    user.comparePassword(req.body.password , (err, isMatch) => {
+      if(!isMatch)
+        return res.json({ loginSuccess: false, message: "비밀번호가 틀렸습니다."})
+  
+      // 비밀번호까지 맞다면 토큰을 생성하기. 
+      user.generateToken((err, user) => {
+        if (err) return res.status(400).send(err);
+
+        // 토큰을 저장한다. 어디에? 쿠키, 로컬스토리지 등등...
+              res.cookie("x_auth", user.token)  // 'name과 'value'탭에 표시되는 것
+              .status(200)
+              .json({ loginSuccess: true, userId: user._id})
+        
+        
+      })
+
+    
+      
+    })
+
+  // 요청된 이메일이 데이터 베스 있다면 비밀번호가 맞는 비밀번호 인지 확인
+
+  })
+
 })
 
 
