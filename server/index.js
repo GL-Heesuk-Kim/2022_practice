@@ -5,7 +5,7 @@ const port = 982
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser'); // npm install cookie-parser --save
 const config = require('./config/key');
-const {auth} = rquire('./middleware/auth');
+const {auth} = require('./middleware/auth');
 const {User} = require("./models/User"); //Register Route 설정 중 :
 
 
@@ -34,8 +34,14 @@ app.get('/', (req, res) => {
 })
 
 
+app.get('/api/hello', (req, res)=> {
+
+  res.send("랜딩페이지에 응답합니다. 안녕하세요.!")
+})
+
+
 //회원가입을 위한 Route(라우트) 만들기
-app.post('/api/users/register', (req, res) => {
+app.post('/register', (req, res) => {
   //Register Route 설정 중 : 회원가입시 필요한 정보들을
   //모아서 데이터 베이스에 넣어주는 일
 
@@ -53,7 +59,7 @@ app.post('/api/users/register', (req, res) => {
 
 
 //#11-login route
-app.post('/login', (req,res) => {
+app.post('/api/user/login', (req,res) => {
   
   // 요청된 이일ㅡㄹ 데터이스에서 있는지 찾ㅡ다
   User.findOne({ email: req.body.email  }, (err, user) => {
@@ -106,6 +112,20 @@ app.get('/api/users/auth', auth, (req, res) =>{
     role: req.user.role,
     image: req.user.image
   })
+})
+
+
+app.get('/api/users/logout', auth, (req, res) => {
+
+  User.findOneAndUpdate({ _id: req.user._id}, 
+    { token: ""}
+    , (err, user) => {
+      if(err) return res.json({ success:false, err});
+      return res.status(200).send({
+        success: true
+      })
+    })
+
 })
 
 

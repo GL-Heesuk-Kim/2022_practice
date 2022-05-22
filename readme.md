@@ -48,3 +48,17 @@
 # k2: Secret Information => for preventing secret info from being commited to github
 # # 2022_practice
 # ..
+
+
+# 리액트 시작
+# install: npx create-react-app .
+# npx를 사용하는 이유?
+# 원래 create-react-app을 하려면 npm install -g create-react-app을 통해서
+# global 디렉토리에 다운받았어요
+# 이제는 디스크공간 사용없이?!  npx를 이용하여 그냥 create-react-app를 이용 할 수 있어요
+# 그리고 npx가 알아서 npm registry에서 (아마도 가장 최신의!?) create-react-app을 찾아서(look up)
+# 실행시켜주기 때문에 항상 최신버전을 사용할 수 있어요
+
+
+# 어떻게 연결되어 있는지: index.html과 index.js의 연결, App.js컴포넌트와 index.js의 연결
+# public 폴더와 src 폴더의 사용: webpack이 관리해주는 폴더는 src이기 때문에 이미지 등을 저장할때는 src를 사용하는 것을 추천

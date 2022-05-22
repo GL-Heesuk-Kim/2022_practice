@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 //비밀번호 암호화 작업: salt활용 ; saltround 10이면 10자리를 ...
 const bcrypt = require('bcrypt');
-const { is } = require('../server/node_modules/express/lib/request');
+const { is } = require('express/lib/request');
 const saltRounds = 10
 
 const jwt = require('jsonwebtoken');
